@@ -1,7 +1,7 @@
 import CodeBlock from "./CodeBlock";
 
 function CommentContent({ content }: { content: string }) {
-  // regex
+  //  Regex Magic
   const parts = content.split(/(```[\w-]*\n[\s\S]*?\n```)/g);
 
   return (

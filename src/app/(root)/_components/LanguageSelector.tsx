@@ -1,6 +1,6 @@
 "use client";
 import { useCodeEditorStore } from "@/store/useCodeEditorStore";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";   // useRef{Accessing DOM elements (input, canvas, etc.)}
 import { LANGUAGE_CONFIG } from "../_constants";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
@@ -37,7 +37,7 @@ function LanguageSelector({hasAccess}: {hasAccess: boolean}) {
     if(!mounted) return null;
 
   return (
-    <div className="relative ref={dropdownRef}">
+    <div className="relative" ref={dropdownRef}>
       <motion.button   whileHover={{ scale: 1.02 }}
         whileTap={{ scale: 0.98 }}
         onClick={() => setIsOpen(!isOpen)}

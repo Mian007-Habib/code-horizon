@@ -16,7 +16,7 @@ import { ChevronRight, Clock, Code, ListVideo, Loader2, Star } from "lucide-reac
 import StarButton from "@/components/StarButton";
 
 
-const TABS = [
+const TABS = [               // creating an array of objects, where each object represents a single tab.
     {
       id: "executions",
       label: "Code Executions",
@@ -33,14 +33,17 @@ const TABS = [
 function ProfilePage() {
 
     const { user, isLoaded } = useUser();
-  const router = useRouter();
+  const router = useRouter();     // navigate to other pages
 
-  const [activeTab, setActiveTab] = useState<"executions" | "starred">("executions");
-
+  const [activeTab, setActiveTab] = useState<"executions" | "starred">("executions"); //Track Which Tab is Active, create state varible
+// Fetch Stats for the User
   const userStats = useQuery(api.codeExecutions.getUserStats, {
     userId: user?.id ?? "",
   });
 
+
+    //usePaginatedQuery
+  //Give me the latest 5 code runs for this user… and let me load more if needed
   const starredSnippets = useQuery(api.snippets.getStarredSnippets);
 
   const {
@@ -55,7 +58,7 @@ function ProfilePage() {
     },
     { initialNumItems: 5 }
   );
-
+   
 
   const userData = useQuery(api.users.getUser, { userId: user?.id ?? "" });
 
@@ -63,7 +66,8 @@ function ProfilePage() {
     if (executionStatus === "CanLoadMore") loadMore(5);
   };
 
-  if (!user && isLoaded) return router.push("/");
+  if (!user && isLoaded) return router.push("/"); //This line checks if the user is not logged in after loading is complete. If so, it redirects them to the homepage.
+
   return (
     <div className="min-h-screen bg-[#0a0a0f]">
       <NavigationHeader />
@@ -223,6 +227,9 @@ function ProfilePage() {
               {/* ACTIVE TAB IS STARS: */}
               {activeTab === "starred" && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+                {/*The map function loops through the starredSnippets array, and for each snippet, it renders a div with that snippet's details.*/}
+                
                   {starredSnippets?.map((snippet) => (
                     <div key={snippet._id} className="group relative">
                       <Link href={`/snippets/${snippet._id}`}>

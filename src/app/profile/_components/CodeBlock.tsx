@@ -10,9 +10,9 @@ interface CodeBlockProps {
 }
 
 const CodeBlock = ({ code, language }: CodeBlockProps) => {
-  const [isExpanded, setIsExpanded] = useState(false);
-  const lines = code.split("\n");
-  const displayCode = isExpanded ? code : lines.slice(0, 6).join("\n");
+  const [isExpanded, setIsExpanded] = useState(false);  // Tracks whether the code block is expanded
+  const lines = code.split("\n"); // Splits the code into lines based on newlines
+  const displayCode = isExpanded ? code : lines.slice(0, 6).join("\n"); // Displays the first 6 lines or the full code if expanded
 
   return (
     <div className="relative">

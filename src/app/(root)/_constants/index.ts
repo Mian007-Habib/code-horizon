@@ -2,6 +2,7 @@ import { Monaco } from "@monaco-editor/react";
 import { Theme } from "../../../types";
 
 
+//is a TypeScript utility type. Record<string, {...}>
 type LanguageConfig = Record<
   string,
   {

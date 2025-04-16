@@ -1,6 +1,10 @@
 "use client";
 
-import { useCodeEditorStore } from "@/store/useCodeEditorStore";
+import { useCodeEditorStore } from "@/store/useCodeEditorStore"; //  code editor's state, like selected language, theme, or content.
+
+//useEffect: Runs side effects (e.g., fetching data or updating themes).
+//useState: Manages component state (e.g., tracking user input, loading states).
+
 import { useEffect, useState } from "react";
 import { defineMonacoThemes,LANGUAGE_CONFIG } from "../_constants";
 import { Editor } from "@monaco-editor/react";
@@ -9,11 +13,12 @@ import { RotateCcwIcon, ShareIcon, TypeIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { useClerk } from "@clerk/nextjs";
 import { EditorPanelSkeleton } from "./ditorPanelSkeleton";
+//the component is first created and added to the DOM.
 import useMounted from "@/hooks/useMounted";
 import ShareSnippetDialog from "./ShareSnippetDialog";
 
 function EditorPanel() {
-  const clerk = useClerk();
+  const clerk = useClerk();   //hook from Clerk Authentication, Gets the current authentication state (user info, sign-in status).
   const [isShareDialogOpen, setIsShareDialogOpen] = useState(false);
   const { language, theme, fontSize, editor, setFontSize, setEditor } = useCodeEditorStore();
   const mounted = useMounted();
@@ -104,6 +109,9 @@ function EditorPanel() {
         </div>
 
              {/* Editor  */}
+             
+             {/* This code renders a Monaco Editor instance only when Clerk is loaded. It syncs the editor state with a store, applies custom themes, and configures various editor options.  */}
+
              <div  className="relative group rounded-xl overflow-hidden ring-1 ring-white/[0.05] ">
              {clerk.loaded && (
              <Editor

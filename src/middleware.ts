@@ -10,3 +10,18 @@ export const config = {
     '/(api|trpc)(.*)',
   ],
 };
+
+
+ //✅ You’re securing your app with Clerk's middleware.
+
+ //🛡️ It checks auth before letting users access protected routes.
+
+ //⚙️ The matcher avoids unnecessary routes and speeds things up.
+
+ // Clerk will only run on actual pages and API routes, not your static assets.
+
+ //✅ It handles authentication, authorization, and rate limiting.
+
+ //🛡️ It protects your app from unauthenticated users.
+
+ //⚙️ It avoids unnecessary work. 	Skips CSS, JS, images, etc. — because they don’t need auth.

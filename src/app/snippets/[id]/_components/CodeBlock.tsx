@@ -1,6 +1,7 @@
 import SyntaxHighlighter from "react-syntax-highlighter";
 import CopyButton from "./CopyButton";
 
+//This function ensures the code is clean and neat before displaying it.
 const CodeBlock = ({ language, code }: { language: string; code: string }) => {
   const trimmedCode = code
     .split("\n") // split into lines

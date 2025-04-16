@@ -27,10 +27,10 @@ function Snippetspage() {
   }
 
 
-  const languages = [...new Set(snippets.map((s) => s.language))];
+  const languages = [...new Set(snippets.map((s) => s.language))];  //languages now contains a unique list of programming languages used in snippets.
   const popularLanguages = languages.slice(0, 5);
 
-  const filteredSnippets = snippets.filter((snippet) => {
+  const filteredSnippets = snippets.filter((snippet) => {   //.filter(...) is used to create a new array with only the snippets that meet certain conditions.
     const matchesSearch =
       snippet.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
       snippet.language.toLowerCase().includes(searchQuery.toLowerCase()) ||

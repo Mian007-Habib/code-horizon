@@ -1,5 +1,5 @@
 import { currentUser } from "@clerk/nextjs/server"
-import { ConvexHttpClient } from "convex/browser"
+import { ConvexHttpClient } from "convex/browser"   //  interact with the Convex backend service
 import { api } from "../../../../convex/_generated/api";
 import Link from "next/link";
 import { Blocks, Code2, Sparkles } from "lucide-react";
@@ -69,6 +69,8 @@ async function Header() {
       {/* Right Section: Theme, Language, Pro, Run, Profile */}
       <div className="flex items-center gap-4">
         {/* Theme & Language Selectors */}
+
+        {/*  prop being passed to LanguageSelector */}
         <div className="flex items-center gap-3">
           <ThemeSelector />
           {convexUser && (

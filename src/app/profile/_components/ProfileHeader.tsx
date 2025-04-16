@@ -4,7 +4,7 @@ import { Activity, Code2, Star, Timer, TrendingUp, Trophy, UserIcon, Zap } from 
 import { motion } from "framer-motion";
 import { Id } from "../../../../convex/_generated/dataModel";
 
-import { UserResource } from "@clerk/types";
+import { UserResource } from "@clerk/types";  //all the user data you can access
 
 interface ProfileHeaderProps {
   userStats: {
@@ -127,6 +127,7 @@ function ProfileHeader({ userStats, userData, user }: ProfileHeaderProps) {
             className="group relative bg-gradient-to-br from-black/40 to-black/20 rounded-2xl overflow-hidden"
           >
             {/* Glow effect */}
+              {/* ${stat.gradient} this way is used to add variable into string */}
             <div
               className={`absolute inset-0 bg-gradient-to-r ${stat.color} opacity-0 group-hover:opacity-10 transition-all 
               duration-500 ${stat.gradient}`}

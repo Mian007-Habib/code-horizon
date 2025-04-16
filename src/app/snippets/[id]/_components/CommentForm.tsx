@@ -11,6 +11,8 @@ function CommentForm({ isSubmitting, onSubmit }: CommentFormProps) {
   const [comment, setComment] = useState("");
   const [isPreview, setIsPreview] = useState(false);
 
+
+  //When you press Tab inside the comment box, this function makes it feel like a code editor — it adds 2 spaces where your cursor is instead of jumping to the next field.
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.key === "Tab") {
       e.preventDefault();
@@ -37,6 +39,7 @@ function CommentForm({ isSubmitting, onSubmit }: CommentFormProps) {
     <form onSubmit={handleSubmit} className="mb-8">
       <div className="bg-[#0a0a0f] rounded-xl border border-[#ffffff0a] overflow-hidden">
         {/* Comment form header */}
+         {/*  controls the "Preview/Edit" toggle button inside your comment form. */}
         <div className="flex justify-end gap-2 px-4 pt-2">
           <button
             type="button"
@@ -65,6 +68,8 @@ function CommentForm({ isSubmitting, onSubmit }: CommentFormProps) {
           />
         )}
 
+
+        {/*diving into the submit button that posts a comment*/}
         {/* Comment Form Footer */}
         <div className="flex items-center justify-between gap-4 px-4 py-3 bg-[#080809] border-t border-[#ffffff0a]">
           <div className="hidden sm:block text-xs text-[#808086] space-y-1">

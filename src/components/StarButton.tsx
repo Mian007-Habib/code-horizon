@@ -15,7 +15,7 @@ function StarButton({ snippetId }: { snippetId: Id<"snippets"> }) {
 
   // Mutation to toggle star
   const star = useMutation(api.snippets.starSnippet);
-
+  
   const handleStar = async () => {
     if (!isSignedIn) return;
     await star({ snippetId });
