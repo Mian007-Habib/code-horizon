@@ -1,7 +1,8 @@
 import { v } from "convex/values";
-import { mutation, query } from "./_generated/server";
+import { mutation, query } from "./_generated/server"; //This imports the functions you use to **define Convex backend logic** (read/write access).
 
-
+//You're creating a new code snippet and saving it in the snippets table — but only if the user is logged in.
+//ctx is your gateway to everything your server function needs — database and authentication.
 export const createSnippet = mutation({
     args: {
       title: v.string(),
@@ -31,6 +32,14 @@ export const createSnippet = mutation({
       return snippetId;
     },
   });
+
+//✅ Checks if the user is logged in
+//✅ Checks if they own the snippet
+//🧹 Deletes related comments
+//🧹 Deletes related stars
+//🧨 Deletes the snippet itself
+//snippet.userId = who made it
+//identity.subject = who's logged in//
 
   export const deleteSnippet = mutation({
     args: {

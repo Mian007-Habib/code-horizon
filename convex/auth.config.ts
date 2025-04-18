@@ -1,5 +1,5 @@
 
-
+//“I want to use Clerk as the auth provider, and here's the domain and JWT template to trust when validating users.”
 export default {
     providers: [
      {

@@ -4,7 +4,10 @@ import { create } from "zustand";
 import { Monaco } from "@monaco-editor/react";
 
 const getInitialState = () => {
-  // if we're on the server, return default values
+  // if we're on the server, return default values 
+  //We use it to avoid errors. Let’s say you’re making a code editor that remembers your theme (dark/light) and font size. You save that info in the browser using localStorage.But when your app runs on the server, there’s no localStorage. Then, when the page comes to the browser, you can load the user’s saved settings.
+
+
   if (typeof window === "undefined") {
     return {
       language: "javascript",
@@ -25,10 +28,11 @@ const getInitialState = () => {
   };
 };
 
+// This line creates a custom Zustand store.It keeps track of your editor's state — like language, output, errors, etc.
 export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
   const initialState = getInitialState();
 
-  return {
+  return {  
     ...initialState,
     output: "",
     isRunning: false,
@@ -36,7 +40,7 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
     editor: null,
     executionResult: null,
 
-    getCode: () => get().editor?.getValue() || "",
+    getCode: () => get().editor?.getValue() || "", //This is a function inside the store that gets the current code from the editor.If there’s no editor, it just returns an empty string.
 
     setEditor: (editor: Monaco) => {
       const savedCode = localStorage.getItem(`editor-code-${get().language}`);
@@ -72,6 +76,11 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
       });
     },
 
+    //The runCode function executes the code that the user has written in the editor. It communicates with an API (in this case, Piston API via emkc.org) to execute the code and return the results.
+
+    //Checks if the user has entered code.
+    //Sends the code to a server (Piston API) for execution based on the selected language.
+    //Updates the UI to show the loading state, output, or any errors.
     runCode: async () => {
      const {language, getCode} = get();
      const code = getCode();
@@ -106,6 +115,10 @@ export const useCodeEditorStore = create<CodeEditorState>((set, get) => {
           }
 
            // handle compilation errors
+           //You first check for any top-level error (like data.message).
+           //Then you check for compile-time errors.
+           //Then for run-time errors.
+           //If everything's fine → you'll process the successful result (probably next in your code).
         if (data.compile && data.compile.code !== 0) {
           const error = data.compile.stderr || data.compile.output;
           set({

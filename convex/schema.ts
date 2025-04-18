@@ -1,5 +1,5 @@
 import { defineSchema, defineTable } from "convex/server";
-import { v } from "convex/values";
+import { v } from "convex/values";  //This imports v, which is a helper object containing validators for data types (like v.string(), v.number(), etc.).These validators ensure that your table fields contain values of the correct type.
 
 export default defineSchema({
   user: defineTable({
