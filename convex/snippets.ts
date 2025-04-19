@@ -80,7 +80,10 @@ export const createSnippet = mutation({
       await ctx.db.delete(args.snippetId);
     },
   });
-  
+
+
+  //Lets a user star a code snippet (like a "like")
+  //If they’ve already starred it, it will unstar it instead (toggle behavior)
   export const starSnippet = mutation({
     args: {
       snippetId: v.id("snippets"),
@@ -115,7 +118,7 @@ export const createSnippet = mutation({
   });
   
   
-  
+  //This function allows a logged-in user to leave a comment on a specific snippet.
   export const addComment = mutation({
     args: {
       snippetId: v.id("snippets"),
@@ -142,6 +145,8 @@ export const createSnippet = mutation({
     },
   });
   
+
+  //It allows a user to delete their own comment
   export const deleteComment = mutation({
     args: { commentId: v.id("snippetComments") },
     handler: async (ctx, args) => {
@@ -160,6 +165,8 @@ export const createSnippet = mutation({
     },
   });
   
+
+  //It fetches all snippets from the database and returns them, ordered from newest to oldest.
   export const getSnippets = query({
     handler: async (ctx) => {
       const snippets = await ctx.db.query("snippets").order("desc").collect();
@@ -167,6 +174,8 @@ export const createSnippet = mutation({
     },
   });
   
+
+  //It fetches one specific snippet by its ID from the database.
   export const getSnippetById = query({
     args: { snippetId: v.id("snippets") },
     handler: async (ctx, args) => {
@@ -176,7 +185,9 @@ export const createSnippet = mutation({
       return snippet;
     },
   });
-  
+
+
+  //Gets all the comments related to one specific snippet
   export const getComments = query({
     args: { snippetId: v.id("snippets") },
     handler: async (ctx, args) => {
@@ -191,6 +202,8 @@ export const createSnippet = mutation({
     },
   });
   
+
+  //“Has the currently logged-in user starred this snippet?”
   export const isSnippetStarred = query({
     args: {
       snippetId: v.id("snippets"),
@@ -214,7 +227,7 @@ export const createSnippet = mutation({
   });
   
   
-  
+  //It counts how many users have starred a specific code snippet.
   export const getSnippetStarCount = query({
     args: {
       snippetId: v.id("snippets"),
@@ -231,6 +244,7 @@ export const createSnippet = mutation({
   });
   
   
+  //When a user opens their profile, they can see all the snippets they liked/starred.
   export const getStarredSnippets = query({
     handler: async (ctx) => {
       const identity = await ctx.auth.getUserIdentity();
