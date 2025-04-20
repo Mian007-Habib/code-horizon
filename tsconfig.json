@@ -1,3 +1,4 @@
+//it tells the TypeScript compiler how to understand and check your code.
 {
   "compilerOptions": {
     "target": "ES2017",
