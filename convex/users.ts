@@ -2,7 +2,7 @@ import { v } from "convex/values";
 import { mutation, query } from "./_generated/server";
 
 
-
+//“If this user isn’t in the database already, then save them as a new user with their name, email, and userId.”
 
 export const syncUser = mutation({
     args:{
@@ -42,6 +42,10 @@ export const getUser = query({
     },
   });
 
+
+  //This function upgrades a user to Pro after a successful payment via Lemon Squeezy.
+  //Find the user using their email. If they exist, mark them as Pro and save their Lemon Squeezy info.
+  //ctx.db.patch is used to modify or update certain fields of a record in the database without changing the entire record.
   export const upgradeToPro = mutation({
     args: {
       email: v.string(),
